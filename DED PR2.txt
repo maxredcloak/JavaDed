@@ -1,0 +1,32 @@
+Los puntos que dejan mas libertad seria, desde mi punto de vista, el tratamiento de los Workers, por lo tanto comenzare haciendo un inciso en ellos. 
+Por otro lado tambien comentare algunos cambios extra realizados y otras observaciones.
+
+- Respecto al tema de Workers, he realizado algun cambio en la estructura:
+	- En Organization he establecido la lista encadenada de usuarios como trabajdores, ya que todos ellos trabajan para la empresa.
+	- De la misma manera, he establecido en Role una lista de trabajadores en vez de una usuarios, la razón es la misma que la anterior; para tener un rol es necesario ser un trabajador y no un usuario.
+	- Respecto a los cambios anteriores, tambien era posible mantener la estructura con el objeto usuario, pero especificandolo como Worker obtenemos varias ventajas:
+		- Gracias al polimorfismo, podemos tratar a las listas de trabajadores como usuarios si fuera necesario.
+		- Al estar declaradas como listas de trabajadores, tenemos una idea mas precisa de su contenido, de la otra manera si alguien que no conoce del todo el sistema tuviera que realizar cambios podria equivocarse y añadir no trabajadores a los listados.
+	- Finalmente, los trabajadores tienen, ademas de la herencia de User, atributos para guardar su rol i organización.
+
+- En lo que respecta a las colas con prioridad, se han creado metodos de ordenacion para los objetos que lo necesitaran siguiendo las indicaciones de la practica.
+
+- En los arboles, se ha realizado una busqueda aprovechando los hijos y las propiedades del TAD.
+	- He observado que el codigo utilizado para este tipo de busquedas es muy similar, por lo tanto se podria unificar para que solo fuera necesario llamar a una funcion.
+	- Mi solución ha sido crear la interfaz idComparable con una funcion compareTo(String id) para así poder hacer comparaciones con las ids de los objetos.
+	- De esta manera, todas las busquedas de arbol utilizan el mismo algoritmo, en consecuencia sera mucho mas simple modificar dicha busqueda.
+	- De la misma manera, si necesitamos añadir otro arbol, solo necesitaremos hacer que el objeto del arbol implemente idComparable para que pueda realizar el algoritmo de busqueda.
+
+- En algunos casos se han añadido nuevos contadores para hacer mas rapido este tipo de consultas.
+- He dejado la logica del GetBadge en User, como solo es utilizada en este ambito he decidido dejarla donde esta, pero podria provocar problemas de cohesion.
+
+- Respecto al alcance:
+	- Primero he limitado mi alcance a cumplir con el TDD.
+	- Una vez terminado y siguiendo los principios del TDD, he refactorizado.
+	- Adicionalmente he añadido nuevos test.
+	- Por lo tanto mi alcance se ha limitado al especificado en el TDD y en buscar mejorar (aunque solo sea un poco mas) la cobertura de los test para que en un futuro sea mas seguro añadir nuevos desarrollos.
+	
+- OTROS:
+- Hay algunos atributos que no se utilizan, como Activity.descripcion, sin embargo esto se debe a la naturaleza de la practica (Nos estamos centrando en aplicar ciertos cambios). Si se tratara de un software real el atributo anterior estaria reflejado en el frontend de la aplicación, por lo tanto no he eliminado ningun atributo.
+- He añadido test para todos los throws de la implementación, ya que en algunos casos habia olvidado controlar las excepciones, así me aseguraba de que todo funcionara correctamente fuera del happy path.
+- He comprovado no tener funciones de gran tamaño (>50 lineas).
